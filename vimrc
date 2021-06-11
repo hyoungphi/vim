@@ -75,6 +75,8 @@ set smartindent
 set tabstop=2
 set expandtab
 set shiftwidth=2
+" Highlight line with cursor
+set cursorline
 " 구문 강조 사용
 if has("syntax")
  syntax on
@@ -89,9 +91,10 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
 
-set rtp+=/etc/vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 "Plugin 'bundle/vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 "Plugin 'git://git.wincent.com/command-t.git'
 "Plugin 'file:///home/gmarik/path/to/plugin'
 Plugin 'nanotech/jellybeans.vim'
@@ -117,10 +120,22 @@ function! ToggleMouse()
         set mouse=a
     endif
 endfunc
-Plugin 'VundleVim/Vundle.vim'
 
 map <F6> <ESC>:call ToggleMouse()<CR>
 
 map <LEADER>n <ESC>:NERDTree<CR>
 map <F8> <ESC>:TlistToggle<CR>
 let Tlist_Use_Right_Window = 1
+
+"map <UP> <UP>z.
+"map <DOWN> <DOWN>z.
+"z.
+"call z<CR>
+highlight CursorLine cterm=underline gui=underline
+"highlight CursorLine cterm=bold gui=bold
+"highlight CursorLine ctermfg=White ctermbg=Yellow
+
+augroup KeepCentered
+  autocmd!
+  autocmd CursorMoved * normal! zz
+augroup END
